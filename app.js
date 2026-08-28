@@ -1,5 +1,5 @@
 const params = new URLSearchParams(location.search);
-const id = params.get('car') || 'f1';
+const id = params.get('car') || 'porsche911';
 let car;
 
 fetch('data/cars.json')
