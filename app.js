@@ -44,21 +44,12 @@ function render() {
     `<strong>${car.name}</strong><br>${car.engine}<br><em>${car.note}</em>`;
 }
 
-$('start').addEventListener('click', async () => {
+$('start').addEventListener('click', () => {
   $('snd').play().catch(e => console.warn('audio blocked', e));
   $('gate').hidden = true;
   $('stage').hidden = false;
   render();
   buildSwitcher();
-
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' }
-    });
-    $('cam').srcObject = stream;
-  } catch (e) {
-    console.warn('camera denied', e);
-  }
 });
 
 $('replay').addEventListener('click', () => {
