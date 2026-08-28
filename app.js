@@ -15,7 +15,6 @@ fetch('data/cars.json')
     $('gate-engine').textContent = car.engine;
     $('snd').src = car.audio;
     $('mv').src = car.model;
-    buildSwitcher();
   })
   .catch(() => { $('gate-title').textContent = 'Could not load car data'; });
 
@@ -35,7 +34,7 @@ function switchCar(key) {
   car = allCars[key];
   $('snd').src = car.audio;
   $('mv').src = car.model;
-  $('snd').play();
+  $('snd').play().catch(e => console.warn(e));
   render();
   buildSwitcher();
 }
@@ -45,11 +44,21 @@ function render() {
     `<strong>${car.name}</strong><br>${car.engine}<br><em>${car.note}</em>`;
 }
 
-$('start').addEventListener('click', () => {
+$('start').addEventListener('click', async () => {
   $('snd').play().catch(e => console.warn('audio blocked', e));
   $('gate').hidden = true;
   $('stage').hidden = false;
   render();
+  buildSwitcher();
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment' }
+    });
+    $('cam').srcObject = stream;
+  } catch (e) {
+    console.warn('camera denied', e);
+  }
 });
 
 $('replay').addEventListener('click', () => {
