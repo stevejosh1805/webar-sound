@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AR Sound & Engine Note Preview</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+  <header>
+    <h1>AR Sound &amp; Engine Note Preview</h1>
+    <p>Scan a code to hear the engine and place the car in your space.</p>
+  </header>
 
+  <div id="cards"></div>
+
+  <footer>XR for Automotives</footer>
+
+  <script>
+    const base = location.href.replace(/index\.html.*$/, '').replace(/\/?$/, '/');
+
+    fetch('data/cars.json')
+      .then(r => r.json())
+      .then(cars => {
+        const wrap = document.getElementById('cards');
+        Object.keys(cars).forEach(key => {
+          const c = cars[key];
+          const url = base + 'car.html?car=' + key;
+
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h2>${c.name}</h2>
+            <p class="spec">${c.engine}</p>
+            <div class="qr" id="qr-${key}"></div>
+            <a class="open" href="${url}">Open directly</a>
+          `;
+          wrap.appendChild(card);
+
+          new QRCode(document.getElementById('qr-' + key), {
+            text: url,
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff'
+          });
+        });
+      })
+      .catch(() => {
+        document.getElementById('cards').textContent = 'Could not load car data';
+      });
+  </script>
+</body>
+</html>
