@@ -12,7 +12,7 @@
   <div id="gate">
     <h1 id="gate-title">Loading…</h1>
     <p id="gate-engine"></p>
-    <button id="start">▶ Hear it, then place it</button>
+    <button id="start">▶ Hear it</button>
   </div>
 
   <div id="stage" hidden>
@@ -23,13 +23,12 @@
       <button slot="ar-button" class="ar-btn">View in your space</button>
     </model-viewer>
 
-    <canvas id="wave" height="60"></canvas>
     <div id="switcher"></div>
     <div id="info"></div>
     <button id="replay">🔊 Replay engine note</button>
   </div>
 
-  <audio id="snd" preload="auto" crossorigin="anonymous"></audio>
+  <audio id="snd" preload="auto"></audio>
   <script src="app.js"></script>
 </body>
 </html>
