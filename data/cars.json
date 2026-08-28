@@ -11,8 +11,8 @@
     "name": "Ferrari SF90",
     "engine": "4.0L Twin-Turbo V8 Hybrid",
     "model": "models/sf90.glb",
-    "audio": "audio/sf90.mp3",
+    "audio": "audio/sf90.wav",
     "note": "Twin-turbo V8 with electric assist — hard, flat-plane crack",
-    "scale": "40 40 40"
+    "scale": "1 1 1"
   }
 }
