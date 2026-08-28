@@ -1,0 +1,16 @@
+{
+  "f1": {
+    "name": "McLaren F1 Car",
+    "engine": "1.6L V6 Turbo Hybrid",
+    "model": "models/f1.glb",
+    "audio": "audio/f1.mp3",
+    "note": "High-revving hybrid V6 — screaming top end"
+  },
+  "porsche911": {
+    "name": "Porsche 911",
+    "engine": "3.0L Flat-Six",
+    "model": "models/porsche911.glb",
+    "audio": "audio/porsche911.mp3",
+    "note": "Rear-mounted flat-six — distinctive metallic wail"
+  }
+}
