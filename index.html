@@ -3,46 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AR Sound & Engine Note Preview</title>
+  <title>AR Sound &amp; Engine Note Preview</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="home">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
   <header>
-    <h1>AR Sound &amp; Engine Note Preview</h1>
-    <p>Scan a code to hear the engine and place the car in your space.</p>
+    <span class="eyebrow">XR for Automotives</span>
+    <h1>Hear it before you<br><span class="grad">drive it</span></h1>
+    <p>Scan a code. The engine note plays, and the car lands in your space at full scale.</p>
   </header>
 
   <div id="cards"></div>
 
-  <footer>XR for Automotives</footer>
+  <footer>Built with WebAR &middot; No app install required</footer>
 
   <script>
     const base = location.href.replace(/index\.html.*$/, '').replace(/\/?$/, '/');
+    const accents = ['#ff5a5f', '#ffc634', '#4ddbc4', '#8b7cff'];
 
     fetch('data/cars.json')
       .then(r => r.json())
       .then(cars => {
         const wrap = document.getElementById('cards');
-        Object.keys(cars).forEach(key => {
+        Object.keys(cars).forEach((key, i) => {
           const c = cars[key];
           const url = base + 'car.html?car=' + key;
+          const accent = accents[i % accents.length];
 
           const card = document.createElement('div');
           card.className = 'card';
+          card.style.setProperty('--accent', accent);
           card.innerHTML = `
-            <h2>${c.name}</h2>
-            <p class="spec">${c.engine}</p>
+            <div class="card-top">
+              <h2>${c.name}</h2>
+              <p class="spec">${c.engine}</p>
+            </div>
             <div class="qr" id="qr-${key}"></div>
-            <a class="open" href="${url}">Open directly</a>
+            <p class="note">${c.note}</p>
+            <a class="open" href="${url}">Open without scanning &rarr;</a>
           `;
           wrap.appendChild(card);
 
           new QRCode(document.getElementById('qr-' + key), {
             text: url,
-            width: 200,
-            height: 200,
-            colorDark: '#000000',
+            width: 190,
+            height: 190,
+            colorDark: '#0d0d0f',
             colorLight: '#ffffff'
           });
         });
