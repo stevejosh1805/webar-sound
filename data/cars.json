@@ -5,5 +5,12 @@
     "model": "models/porsche911.glb",
     "audio": "audio/porsche911.wav",
     "note": "Rear-mounted flat-six — distinctive metallic wail"
+  },
+  "sf90": {
+    "name": "Ferrari SF90",
+    "engine": "4.0L Twin-Turbo V8 Hybrid",
+    "model": "models/sf90.glb",
+    "audio": "audio/sf90.mp3",
+    "note": "Twin-turbo V8 with electric assist — hard, flat-plane crack"
   }
 }
